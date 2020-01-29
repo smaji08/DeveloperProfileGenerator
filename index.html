@@ -1,33 +1,4 @@
-const colors = {
-  green: {
-    wrapperBackground: "#E6E1C3",
-    headerBackground: "#C1C72C",
-    headerColor: "black",
-    photoBorderColor: "black"
-  },
-  blue: {
-    wrapperBackground: "#5F64D3",
-    headerBackground: "#26175A",
-    headerColor: "white",
-    photoBorderColor: "#73448C"
-  },
-  pink: {
-    wrapperBackground: "#879CDF",
-    headerBackground: "#FF8374",
-    headerColor: "white",
-    photoBorderColor: "#FEE24C"
-  },
-  red: {
-    wrapperBackground: "#DE9967",
-    headerBackground: "#870603",
-    headerColor: "white",
-    photoBorderColor: "white"
-  }
-};
-
-function generateHTML(data,resp,star) {
-  console.log("am here");
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
@@ -53,7 +24,7 @@ function generateHTML(data,resp,star) {
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[data.color].wrapperBackground};
+         background-color: #879CDF;
          padding-top: 100px;
          }
          body {
@@ -95,8 +66,8 @@ function generateHTML(data,resp,star) {
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[data.color].headerBackground};
-         color: ${colors[data.color].headerColor};
+         background-color: #FF8374;
+         color: white;
          padding: 10px;
          width: 95%;
          border-radius: 6px;
@@ -107,7 +78,7 @@ function generateHTML(data,resp,star) {
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[data.color].photoBorderColor};
+         border: 6px solid #FEE24C;
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -150,8 +121,8 @@ function generateHTML(data,resp,star) {
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[data.color].headerBackground};
-           color: ${colors[data.color].headerColor};
+           background-color: #FF8374;
+           color: white;
            margin: 20px;
          }
          
@@ -177,47 +148,42 @@ function generateHTML(data,resp,star) {
     
     
      <header class="wrapper">   
-    <div class="photo-header"> <img src = ${resp.data.avatar_url}></img>
+    <div class="photo-header"> <img src = https://avatars2.githubusercontent.com/u/54964461?v=4></img>
     <p> <h1> Hi!</h1></p>
-    <p> <h2>My Name is ${resp.data.name}</h2></p>
+    <p> <h2>My Name is Augustine Stella Maria</h2></p>
     <p><h4>Currently at @UCONN Bootcamp</h4></p>
     
-    <p class="links-nav nav-link "><h6><i class="fas fa-location-arrow"></i> ${resp.data.location} &nbsp;&nbsp;    
-      <i class="fab fa-github-alt"></i><a href = ${resp.data.html_url} target = "_blank"> Github</a>&nbsp;&nbsp;
-      <i class="fas fa-rss"></i><a href = ${resp.data.blog} target = "_blank"> Blog</a>
+    <p class="links-nav nav-link "><h6><i class="fas fa-location-arrow"></i> Manchester, CT &nbsp;&nbsp;    
+      <i class="fab fa-github-alt"></i><a href = https://github.com/smaji08 target = "_blank"> Github</a>&nbsp;&nbsp;
+      <i class="fas fa-rss"></i><a href = https://smaji08.github.io/Bootstrap-Portfolio/index.html target = "_blank"> Blog</a>
     </h6></p><br><br><br>
     </div>
     </header>
     <main>
     <div class="container">
       <div class="row">
-    <p><h3>${resp.data.bio}</h3></p>
+    <p><h3>An Agile and Aspiring Web Developer
+</h3></p>
 
   </div>
   <div class="row">
   <div class="col card">
-    <h2>Public Repositories<br>${resp.data.public_repos}</h2>
+    <h2>Public Repositories<br>16</h2>
   </div>
   <div class="col card">
-    <h2>Followers<br>${resp.data.followers}</h2>
+    <h2>Followers<br>19</h2>
   </div>
 </div>
 <div class ="row">
   <div class="col card">
-    <h2>Github Stars<br>${Object.keys(star.data).length}</h2>
+    <h2>Github Stars<br>5</h2>
   </div>
   <div class="col card">
-    <h2>Following<br>${resp.data.following}</h2>
+    <h2>Following<br>22</h2>
   </div>
 </div>
 </div>
     <main>
     <footer class="wrapper"></footer>
     </body>
-  </html>`
-        }
-
-        module.exports = {
-          colors: colors,
-          generateHTML:generateHTML
-        };
+  </html>
