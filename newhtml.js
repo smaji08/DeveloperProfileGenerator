@@ -26,14 +26,14 @@ const colors = {
 };
 
 function generateHTML(data,resp,star) {
-  console.log("am here");
+  // console.log("am here");
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+      <link href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
       <title>Document</title>
       <style>
@@ -90,8 +90,9 @@ function generateHTML(data,resp,star) {
          }
          .photo-header {
          position: relative;
-         margin: 0 auto;
+         margin-top: 60px;
          margin-bottom: -50px;
+         margin-left: 35px;
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
@@ -100,6 +101,7 @@ function generateHTML(data,resp,star) {
          padding: 10px;
          width: 95%;
          border-radius: 6px;
+         height: 100%;
          }
          .photo-header img {
          width: 250px;
@@ -174,50 +176,47 @@ function generateHTML(data,resp,star) {
       </style>
     </head>
     <body>
-    
-    
-     <header class="wrapper">   
-    <div class="photo-header"> <img src = ${resp.data.avatar_url}></img>
-    <p> <h1> Hi!</h1></p>
-    <p> <h2>My Name is ${resp.data.name}</h2></p>
-    <p><h4>Currently at @UCONN Bootcamp</h4></p>
-    
-    <p class="links-nav nav-link "><h6><i class="fas fa-location-arrow"></i> ${resp.data.location} &nbsp;&nbsp;    
-      <i class="fab fa-github-alt"></i><a href = ${resp.data.html_url} target = "_blank"> Github</a>&nbsp;&nbsp;
-      <i class="fas fa-rss"></i><a href = ${resp.data.blog} target = "_blank"> Blog</a>
-    </h6></p><br><br><br>
-    </div>
-    </header>
-    <main>
-    <div class="container">
-      <div class="row">
-    <p><h3>${resp.data.bio}</h3></p>
-
-  </div>
-  <div class="row">
-  <div class="col card">
-    <h2>Public Repositories<br>${resp.data.public_repos}</h2>
-  </div>
-  <div class="col card">
-    <h2>Followers<br>${resp.data.followers}</h2>
-  </div>
-</div>
-<div class ="row">
-  <div class="col card">
-    <h2>Github Stars<br>${Object.keys(star.data).length}</h2>
-  </div>
-  <div class="col card">
-    <h2>Following<br>${resp.data.following}</h2>
-  </div>
-</div>
-</div>
-    <main>
-    <footer class="wrapper"></footer>
+      <header class="wrapper">   
+        <div class="photo-header"> <img src = ${resp.data.avatar_url}></img>
+          <p><h1>Hi!</h1></p>
+          <p><h2>My Name is ${resp.data.name}</h2></p>
+          <p><h4>Currently at @UCONN Bootcamp</h4></p>
+          <ul class= "links-nav">
+            <li class= "nav-link"><h5><i class="fas fa-location-arrow"></i> ${resp.data.location} &nbsp;</h5></li> 
+            <li class= "nav-link"><h5><i class="fab fa-github-alt"></i><a href = ${resp.data.html_url} target = "_blank"> Github</a>&nbsp;</h5></li>
+            <li class= "nav-link"><h5><i class="fas fa-rss"></i><a href = ${resp.data.blog} target = "_blank"> Blog</a></h5></li>
+          </ul>
+        </div>
+      </header>
+      <main>
+        <div class="container">
+          <div class="row">
+            <p><h3>${resp.data.bio}</h3></p>
+          </div>
+          <div class="row">
+            <div class="col card">
+              <h2>Public Repositories<br>${resp.data.public_repos}</h2>
+            </div>
+            <div class="col card">
+              <h2>Followers<br>${resp.data.followers}</h2>
+            </div>
+          </div>
+          <div class ="row">
+            <div class="col card">
+              <h2>Github Stars<br>${Object.keys(star.data).length}</h2>
+            </div>
+            <div class="col card">
+              <h2>Following<br>${resp.data.following}</h2>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="wrapper"></footer>
     </body>
   </html>`
-        }
+}
 
-        module.exports = {
-          colors: colors,
-          generateHTML:generateHTML
-        };
+module.exports = {
+  colors: colors,
+  generateHTML:generateHTML
+};

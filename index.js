@@ -1,19 +1,20 @@
 const inquirer = require("inquirer");
+const axios = require("axios");
+const htmltopdf = require("puppeteer");
 const fs = require("fs");
 const util = require("util");
-const fw = util.promisify(fs.writeFile);
-const newhtm = require ("./newhtml.js");
-const axios = require("axios");
+const writeFile = util.promisify(fs.writeFile);
+const newhtml = require ("./newhtml.js");
 
 function promptUser(){
   return new Promise(resolve => {
       resolve(inquirer.prompt([
-        // {
-        //     type: "input",
-        //     name: "username",
-        //     message: "What is your GitHub username?",
+        {
+            type: "input",
+            name: "username",
+            message: "What is your GitHub username?",
         
-        // },
+        },
         {
             type: "list",
             name: "color",
@@ -24,47 +25,32 @@ function promptUser(){
       ]));
    });
 }
-// function writeToFile(fileName, data) {
-//     return fw("index.html",data,"utf8");
- 
-// }
-
-// function callaxios(){
-//     const queryURL = "https://api.github.com/users/smaji08";
-//     axios
-//         .get(queryURL).then(response => console.log(`from here ${response.data.name}`));
-// }
 
 async function init(){
-        try{
-            const answers = await promptUser();
-            console.log(answers);
-            // const axios1 = await callaxios();
-            const axios1 = await axios("https://api.github.com/users/smaji08");
-            console.log(axios1.data.name);
-            const axios2 = await axios("https://api.github.com/users/smaji08/starred");
-            // console.log(axios2.data);
-            const html =  await newhtm.generateHTML(answers,axios1,axios2);
-            
-            await fw("index.html",html);
-            
-    
-        }
-        catch{
-            console.log("error");
-        }
+    try{
+        const answers = await promptUser();
+        const username = answers.username;
+        const axiosBasic = await axios(`https://api.github.com/users/${username}`);
+        const axiosStar = await axios(`https://api.github.com/users/${username}/starred`);
+        const html =  newhtml.generateHTML(answers,axiosBasic,axiosStar);
+        await writeFile("index.html",html);
+        await writetopdf();
     }
-        
-init();
+    catch(error){
+        console.log(error);
+    }
+}
 
-// promptUser()
-//     .then(function(answers){
-//         const html = newhtm.generateHTML(answers);
-//         return fw("index.html", html);
-//     })
-//     .then(function(){
-//         console.log("successful");
-//     })
-//     .catch(function(err){
-//         console.log(err);
-//     });
+async function writetopdf(){
+    const browser = await htmltopdf.launch({headless: true, slowMo: 150});
+    const page = await browser.newPage();
+    const readHtml = fs.readFileSync("index.html","utf8");
+    await page.setContent(readHtml);
+    await page.pdf({
+        path: "bio.pdf",
+    });
+    console.log("PDF created");
+    await browser.close();
+}
+
+init();
