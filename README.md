@@ -30,5 +30,5 @@ Getting the profile details were pretty straight forward, getting the no. of sta
 Generating PDF from the html was little tricky, tried 2-3 packages but finally settled down with puppeteer where again faced an issue in displaying the fontawesome icons which was finally achieved by setting a value for the property slowMo.
 
 ### Credits
-https://www.youtube.com/watch?v=VjegyE72PBU&t=69s
-http://stackoverflow.com/
+1. https://www.youtube.com/watch?v=VjegyE72PBU&t=69s
+2. http://stackoverflow.com/
